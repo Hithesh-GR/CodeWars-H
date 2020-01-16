@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import CardContent from '@material-ui/core/CardContent';
 import Chip from '@material-ui/core/Chip';
 import CardActions from '@material-ui/core/CardActions';
+import Avatar from '@material-ui/core/Avatar';
 import '../App.css'
 class Dashboard extends React.Component {
     constructor(props) {
@@ -146,6 +147,7 @@ class Dashboard extends React.Component {
                                         <Chip
                                             color="primary"
                                             label={data.merchant}
+                                            avatar={<Avatar>M</Avatar>}
                                         />
                                     </div>
                                     <div>
@@ -164,6 +166,7 @@ class Dashboard extends React.Component {
                                     <Chip
                                         color="secondary"
                                         variant="outlined"
+                                        avatar={<Avatar>N</Avatar>}
                                         label={data.categoryy.name}
                                     />
                                 </div>
