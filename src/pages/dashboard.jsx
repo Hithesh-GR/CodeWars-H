@@ -149,10 +149,11 @@ class Dashboard extends React.Component {
                                         />
                                     </div>
                                     <div>
-                                        <Button size="small"
+                                        <Button variant="contained"
                                             onClick={event => {
                                                 this.handleClick(event, data.mcc);
                                             }}
+                                            // disabled
                                         // onClick={alert(`${data.mcc}`)}
                                         >mcc</Button>
                                     </div>
