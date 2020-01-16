@@ -1,8 +1,10 @@
 import React from 'react';
 import { Card } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
-// import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
+import CardContent from '@material-ui/core/CardContent';
+import Chip from '@material-ui/core/Chip';
+import CardActions from '@material-ui/core/CardActions';
+import '../App.css'
 class Dashboard extends React.Component {
     constructor(props) {
         super(props);
@@ -82,6 +84,9 @@ class Dashboard extends React.Component {
     }
 
     componentWillMount() {
+        this.setState({
+            input: this.state.transaction
+        })
         for (let j = 0; j < this.state.transaction.length; j++) {
             for (let i = 0; i < this.state.category.length; i++) {
                 if (this.state.category[i].mcc.includes(this.state.transaction[j].mcc)) {
@@ -89,19 +94,14 @@ class Dashboard extends React.Component {
                         id: this.state.category[i].id,
                         name: this.state.category[i].name
                     };
-                    // break;
                 }
             }
         }
-        this.setState({
-            input: this.state.transaction
-        })
     }
     componentWillUnmount() {
         // alert(JSON.stringify(alertData));
     }
     handleClick = (e, mcc) => {
-        // console.log("mcc", mcc)
         alert(mcc)
     }
     handleAreaClick = (e, index) => {
@@ -114,53 +114,61 @@ class Dashboard extends React.Component {
         alert(JSON.stringify(alertData));
     };
     render() {
+        let output = this.state.input;
         return (
-            <div className="container" 
-            style={{
-                display: "flex",
-                height: "120vh",
-                width: "100vw",
-                alignItems: "center",
-                justifyContent: "center",
-                flexDirection: "column",
-            }}>
-                {this.state.input.map((data, key) => {
+            <div className="container"
+                style={{
+                    display: "flex",
+                    height: "120vh",
+                    width: "100vw",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexDirection: "column",
+                }}>
+                {output.map((data, key) => {
                     return (
                         <Card
                             style={{
                                 display: "flex",
-                                height: "100px",
-                                width: "200px",
-                                alignItems: "center",
+                                height: "300px",
+                                width: "300px",
+                                flexDirection: "column",
                                 margin: "10px",
                                 justifyContent: "center",
                                 backgroundColor: "light-gray",
                                 borderRadius: "15px", border: "1px solid #dadce0",
 
                             }} onClick={e => this.handleAreaClick(e, data)}
-                            >
-                            <div style={{ display: 'flex', justifyContent: "space-between" }}>
-                                <div>
-                                    {data.merchant}
+                        >
+                            <CardContent>
+                                <div style={{ display: 'flex', justifyContent: "space-between" }}>
                                     <div>
-                                        <Button variant="contained" color="primary" 
-                                        onClick={e => {
-                                            this.handleClick(e, data.mcc);
-                                        }}
+                                        <Chip
+                                            color="primary"
+                                            label={data.merchant}
+                                        />
+                                    </div>
+                                    <div>
+                                        <Button size="small"
+                                            onClick={event => {
+                                                this.handleClick(event, data.mcc);
+                                            }}
                                         // onClick={alert(`${data.mcc}`)}
                                         >mcc</Button>
                                     </div>
                                 </div>
-                            </div>
-                            <div>
-                                <Link>
-                                    {data.categoryy.name}
-                                </Link>
-                            </div>
+                            </CardContent>
+                            <CardActions>
+                                <div style={{ padding: "10px" }}>
+                                    <Chip
+                                        color="secondary"
+                                        label={data.categoryy.name}
+                                    />
+                                </div>
+                            </CardActions>
                         </Card>
                     )
                 })}
-
             </div>
         )
     }
