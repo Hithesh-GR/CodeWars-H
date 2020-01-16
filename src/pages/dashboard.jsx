@@ -163,6 +163,7 @@ class Dashboard extends React.Component {
                                 <div style={{ padding: "10px" }}>
                                     <Chip
                                         color="secondary"
+                                        variant="outlined"
                                         label={data.categoryy.name}
                                     />
                                 </div>
