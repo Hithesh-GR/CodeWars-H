@@ -1,7 +1,8 @@
 import React from 'react';
 import { Card } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+// import TextField from '@material-ui/core/TextField';
+import Link from '@material-ui/core/Link';
 class Dashboard extends React.Component {
     constructor(props) {
         super(props);
@@ -88,7 +89,7 @@ class Dashboard extends React.Component {
                         id: this.state.category[i].id,
                         name: this.state.category[i].name
                     };
-                    break;
+                    // break;
                 }
             }
         }
@@ -106,7 +107,7 @@ class Dashboard extends React.Component {
     handleAreaClick = (e, index) => {
         let alertData = {
             id: index.id,
-            mcc: index.id,
+            mcc: index.mcc,
             merchant: index.merchant,
             categoryName: index.categoryy.name
         };
@@ -114,7 +115,8 @@ class Dashboard extends React.Component {
     };
     render() {
         return (
-            <div className="container" style={{
+            <div className="container" 
+            style={{
                 display: "flex",
                 height: "120vh",
                 width: "100vw",
@@ -124,7 +126,6 @@ class Dashboard extends React.Component {
             }}>
                 {this.state.input.map((data, key) => {
                     return (
-
                         <Card
                             style={{
                                 display: "flex",
@@ -136,23 +137,27 @@ class Dashboard extends React.Component {
                                 backgroundColor: "light-gray",
                                 borderRadius: "15px", border: "1px solid #dadce0",
 
-                            }} onClick={e => this.handleAreaClick(e, data)}>
-
+                            }} onClick={e => this.handleAreaClick(e, data)}
+                            >
                             <div style={{ display: 'flex', justifyContent: "space-between" }}>
                                 <div>
                                     {data.merchant}
                                     <div>
-                                        <Button  variant="contained" color="primary" onClick={e => {
+                                        <Button variant="contained" color="primary" 
+                                        onClick={e => {
                                             this.handleClick(e, data.mcc);
-                                        }}>mcc</Button>
-
+                                        }}
+                                        // onClick={alert(`${data.mcc}`)}
+                                        >mcc</Button>
                                     </div>
                                 </div>
                             </div>
-
-                            <div>{data.categoryy.name}</div>
+                            <div>
+                                <Link>
+                                    {data.categoryy.name}
+                                </Link>
+                            </div>
                         </Card>
-
                     )
                 })}
 
